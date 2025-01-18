@@ -1,0 +1,11 @@
+[user]
+    name = riuboh
+    email = rint1925@gmail.com
+[pull]
+    rebase = false
+[init]
+    defaultBranch = main
+[alias]
+    st = status
+    co = checkout
+    br = branch
