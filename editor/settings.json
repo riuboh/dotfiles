@@ -3,6 +3,7 @@
     "workbench.colorTheme": "One Monokai",
     "workbench.tree.indent": 20,
     "editor.fontSize": 14,
+    "editor.tabSize": 4,
     "editor.fontFamily": "JetBrains Mono",
     "editor.mouseWheelZoom": true,
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
@@ -12,9 +13,11 @@
     "editor.renderLineHighlight": "all",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.fixAll.stylelint": "explicit"
+        "source.fixAll.stylelint": "explicit",
+        "source.organizeImports": "always"
     },
     "window.zoomLevel": 0,
+    "explorer.compactFolders": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     "security.workspace.trust.untrustedFiles": "open",
