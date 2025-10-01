@@ -13,8 +13,7 @@
     "editor.renderLineHighlight": "all",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.fixAll.stylelint": "explicit",
-        "source.organizeImports": "always"
+        "source.fixAll.stylelint": "explicit"
     },
     "window.zoomLevel": 0,
     "explorer.compactFolders": false,
@@ -28,5 +27,9 @@
         "*": true,
         "plaintext": false,
         "scminput": false
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
     }
 }
