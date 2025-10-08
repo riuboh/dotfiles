@@ -31,5 +31,6 @@
     "github.copilot.nextEditSuggestions.enabled": true,
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
-    }
+    },
+    "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
