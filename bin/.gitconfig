@@ -13,5 +13,6 @@
     pso = push origin
     fo = fetch origin
     logs = log --pretty=format:'%H (%ai) %s' -n 20
+    logss = log --pretty=format:'%H (%ai) %s' -n 20
 [credential]
 	helper = erase
