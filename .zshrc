@@ -5,9 +5,11 @@ fi
 
 # alias設定
 alias pj='cd ~/pj'
+alias tmp='code ~/tmp'
 alias ls='ls -G'
-alias python='python3.12'
-alias pip='pip3.12'
+alias python='python3'
+alias pip='pip3'
+alias cc='claude'
 
-# HomebrewのPythonを優先
-export PATH="/opt/homebrew/bin/python3.12:$PATH"
+# local binを優先
+export PATH="/Users/riuboh/.local/bin:$PATH"
