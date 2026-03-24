@@ -10,6 +10,7 @@ alias ls='ls -G'
 alias python='python3'
 alias pip='pip3'
 alias cc='claude'
+alias ccmcp='code /Users/riuboh/.claude.json'
 
 # local binを優先
 export PATH="/Users/riuboh/.local/bin:$PATH"
