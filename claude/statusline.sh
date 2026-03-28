@@ -1,33 +1,16 @@
 #!/bin/bash
+# 標準入力からJSON形式のデータを読み込む
 input=$(cat)
 
-MODEL=$(echo "$input" | jq -r '.model.display_name')
-DIR=$(echo "$input" | jq -r '.workspace.current_dir')
+# 各種情報を取得
+model=$(echo "$input" | jq -r '.model.display_name // "Claude"')
+input_tokens=$(echo "$input" | jq -r '.context_window.total_input_tokens // "0"')
+output_tokens=$(echo "$input" | jq -r '.context_window.total_output_tokens // "0"')
+used=$(echo "$input" | jq -r '.context_window.used_percentage // "0"')
+duration_ms=$(echo "$input" | jq -r '.cost.total_api_duration_ms // "0"')
 
-CACHE_FILE="/tmp/statusline-git-cache"
-CACHE_MAX_AGE=5  # 秒
+# レイテンシを秒に変換（小数点1桁）
+latency=$(echo "scale=1; $duration_ms / 1000" | bc)
 
-cache_is_stale() {
-    [ ! -f "$CACHE_FILE" ] || \
-    # stat -f %m は macOS、stat -c %Y は Linux
-    [ $(($(date +%s) - $(stat -f %m "$CACHE_FILE" 2>/dev/null || stat -c %Y "$CACHE_FILE" 2>/dev/null || echo 0))) -gt $CACHE_MAX_AGE ]
-}
-
-if cache_is_stale; then
-    if git rev-parse --git-dir > /dev/null 2>&1; then
-        BRANCH=$(git branch --show-current 2>/dev/null)
-        STAGED=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
-        MODIFIED=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')
-        echo "$BRANCH|$STAGED|$MODIFIED" > "$CACHE_FILE"
-    else
-        echo "||" > "$CACHE_FILE"
-    fi
-fi
-
-IFS='|' read -r BRANCH STAGED MODIFIED < "$CACHE_FILE"
-
-if [ -n "$BRANCH" ]; then
-    echo "[$MODEL] 📁 ${DIR##*/} | 🌿 $BRANCH +$STAGED ~$MODIFIED"
-else
-    echo "[$MODEL] 📁 ${DIR##*/}"
-fi
+# ステータスライン表示
+echo "${model} | ${input_tokens}/${output_tokens} tokens | Context: ${used}% used | ${latency}s"
