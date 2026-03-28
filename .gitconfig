@@ -15,3 +15,5 @@
     logs = log --pretty=format:'%H (%ai) %s' -n 10
 [credential]
 	helper = erase
+[ghq]
+  root = ~/ghq

@@ -38,6 +38,44 @@ alias cc='claude'
 alias python='python3'
 alias pip='pip3'
 alias ccmcp='code /Users/riuboh/.claude.json'
+alias ga='gwq add -b'
+
+#==========================================================#
+# load something
+#==========================================================#
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# env
+[[ -f secrets/.env.local ]] && source secrets/.env.local
+
+#==========================================================#
+# functions
+#==========================================================#
+
+# move to worktree
+function g() {
+  cd "$(ghq list -p | fzf)"
+}
+
+# generate worktree from remote branch
+function gf() {
+  local branch
+  branch=$(git ls-remote --heads origin | sed 's|.*refs/heads/||' | fzf)
+  [ -z "$branch" ] && return 1
+  git fetch origin "$branch" && gwq add "$branch"
+}
+
+# remove worktree safely
+function gr() {
+  local branch
+  branch=$(gwq list --json | jq -r '.[].branch' | fzf)
+  [ -z "$branch" ] && return 1
+  gwq remove -b "$branch"
+}
+
+
 
 #==========================================================#
 # path settings
