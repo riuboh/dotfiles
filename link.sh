@@ -2,11 +2,15 @@
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-for dotfile in "$SCRIPT_DIR"/.??* ; do
-    [[ "$dotfile" == "$SCRIPT_DIR/.git" ]] && continue
-    [[ "$dotfile" == "$SCRIPT_DIR/.github" ]] && continue
-    [[ "$dotfile" == "$SCRIPT_DIR/.gitignore" ]] && continue
-    [[ "$dotfile" == "$SCRIPT_DIR/.DS_Store" ]] && continue
+dotfiles=(
+    ".zshrc:$HOME/.zshrc"
+    ".gitconfig:$HOME/.gitconfig"
+    "vscode/settings.json:$HOME/Library/Application Support/Code/User/settings.json"
+)
 
-    ln -fnsv "$dotfile" "$HOME"
+for dotfile in "${dotfiles[@]}"; do
+    src="${dotfile%%:*}"
+    dst="${dotfile##*:}"
+    rm -rf "${dst}"
+    ln -s "${SCRIPT_DIR}/${src}" "${dst}"
 done
