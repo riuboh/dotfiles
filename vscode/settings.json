@@ -13,7 +13,7 @@
   "editor.renderLineHighlight": "all",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "window.zoomLevel": 0,
   "explorer.compactFolders": false,
@@ -26,14 +26,14 @@
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
-    "scminput": false,
+    "scminput": false
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.activityBar.location": "top",
@@ -41,5 +41,5 @@
   "claudeCode.preferredLocation": "panel",
   "claudeCode.selectedModel": "opus",
   "git.confirmSync": false,
-  "docker.extension.enableComposeLanguageServer": false,
+  "docker.extension.enableComposeLanguageServer": false
 }
