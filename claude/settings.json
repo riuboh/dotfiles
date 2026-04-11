@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"入力が求められています\" with title \"Claude Code\" sound name \"Blow\"'"
+            "command": "~/.claude/notify.sh 'Claude Code' '入力が求められています' 'Blow'"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"作業が完了しました\" with title \"Claude Code\" sound name \"Glass\"'"
+            "command": "~/.claude/notify.sh 'Claude Code' '作業が完了しました' 'Glass'"
           }
         ]
       }

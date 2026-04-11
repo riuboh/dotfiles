@@ -2,7 +2,6 @@
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-
 mkdir -p ~/.claude
 mkdir -p ~/bin
 
@@ -16,6 +15,7 @@ dotfiles=(
     "claude/mcp.json:$HOME/.claude/mcp.json"
     "claude/settings.json:$HOME/.claude/settings.json"
     "claude/statusline.sh:$HOME/.claude/statusline.sh"
+    "claude/notify.sh:$HOME/.claude/notify.sh"
     "gwq/config.toml:$HOME/.config/gwq/config.toml"
     "vscode/settings.json:$HOME/Library/Application Support/Code/User/settings.json"
 )

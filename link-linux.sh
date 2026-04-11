@@ -13,6 +13,7 @@ dotfiles=(
     "claude/mcp.json:$HOME/.claude/mcp.json"
     "claude/settings.json:$HOME/.claude/settings.json"
     "claude/statusline.sh:$HOME/.claude/statusline.sh"
+    "claude/notify.sh:$HOME/.claude/notify.sh"
 )
 
 for dotfile in "${dotfiles[@]}"; do
