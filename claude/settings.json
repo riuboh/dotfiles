@@ -27,6 +27,11 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
+  "permissions": {
+    "allow": [
+      "mcp__plugin_discord_discord__reply"
+    ]
+  },
   "effortLevel": "medium",
   "enabledPlugins": {
     "discord@claude-plugins-official": true
