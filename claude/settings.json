@@ -27,5 +27,8 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "enabledPlugins": {
+    "discord@claude-plugins-official": true
+  }
 }
