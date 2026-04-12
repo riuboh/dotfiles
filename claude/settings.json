@@ -29,7 +29,13 @@
   },
   "permissions": {
     "allow": [
-      "mcp__plugin_discord_discord__reply"
+      "mcp__plugin_discord_discord__reply",
+      "Fetch",
+      "Grep",
+      "Read",
+      "Skill",
+      "WebFetch",
+      "WebSearch"
     ]
   },
   "effortLevel": "medium",
