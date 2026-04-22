@@ -58,17 +58,49 @@ alias ga='gwq add -b'
 # functions
 #==========================================================#
 
-# move to worktree
+# move to repo
 function g() {
   cd "$(ghq list -p | fzf)"
 }
 
-# generate worktree from remote branch
-function gf() {
+# switch to a local branch
+function b() {
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "b: working tree is dirty. commit or stash first." >&2
+    return 1
+  fi
+  local branch
+  branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ | fzf)
+  [ -z "$branch" ] && return 1
+  git switch "$branch"
+}
+
+# add a local branch
+function ba() {
+  [ -z "$1" ] && echo "ba: branch name required" >&2 && return 1
+  git switch -c "$1"
+}
+
+# delete a local branch
+function bd() {
+  local flag="-d"
+  [ "$1" = "-f" ] && flag="-D"
+  local branch
+  branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ | fzf)
+  [ -z "$branch" ] && return 1
+  git branch "$flag" "$branch"
+}
+
+# fetch and switch to a remote branch
+function bf() {
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "bf: working tree is dirty. commit or stash first." >&2
+    return 1
+  fi
   local branch
   branch=$(git ls-remote --heads origin | sed 's|.*refs/heads/||' | fzf)
   [ -z "$branch" ] && return 1
-  git fetch origin "$branch" && gwq add "$branch"
+  git fetch origin "$branch" && git switch -t "origin/$branch"
 }
 
 # remove worktree safely

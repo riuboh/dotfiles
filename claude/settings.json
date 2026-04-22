@@ -1,4 +1,15 @@
 {
+  "permissions": {
+    "allow": [
+      "mcp__plugin_discord_discord__reply",
+      "Fetch",
+      "Grep",
+      "Read",
+      "Skill",
+      "WebFetch",
+      "WebSearch"
+    ]
+  },
   "hooks": {
     "Notification": [
       {
@@ -27,19 +38,9 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
-  "permissions": {
-    "allow": [
-      "mcp__plugin_discord_discord__reply",
-      "Fetch",
-      "Grep",
-      "Read",
-      "Skill",
-      "WebFetch",
-      "WebSearch"
-    ]
-  },
-  "effortLevel": "medium",
   "enabledPlugins": {
     "discord@claude-plugins-official": true
-  }
+  },
+  "effortLevel": "medium",
+  "model": "opus"
 }

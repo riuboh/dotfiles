@@ -6,6 +6,7 @@ mkdir -p ~/.claude
 
 dotfiles=(
     "bin:$HOME/bin"
+    ".gitconfig:$HOME/.gitconfig"
     ".bashrc:$HOME/.bashrc"
     "claude/commands:$HOME/.claude/commands"
     "claude/skills:$HOME/.claude/skills"
