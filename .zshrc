@@ -45,6 +45,15 @@ alias ccmcp='code /Users/riuboh/.claude.json'
 alias ga='gwq add -b'
 
 #==========================================================#
+# prompt
+#==========================================================#
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' %F{yellow}(%b)%f'
+setopt prompt_subst
+PROMPT='%n@%m %F{69}%1~%f${vcs_info_msg_0_} %# '
+
+#==========================================================#
 # load something
 #==========================================================#
 
@@ -101,12 +110,4 @@ function bf() {
   branch=$(git ls-remote --heads origin | sed 's|.*refs/heads/||' | fzf)
   [ -z "$branch" ] && return 1
   git fetch origin "$branch" && git switch -t "origin/$branch"
-}
-
-# remove worktree safely
-function gr() {
-  local branch
-  branch=$(gwq list --json | jq -r '.[].branch' | fzf)
-  [ -z "$branch" ] && return 1
-  gwq remove -b "$branch"
 }
