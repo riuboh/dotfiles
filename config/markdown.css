@@ -1,0 +1,151 @@
+body {
+  font-family:
+    "LINE Seed JP",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Sans",
+    "Yu Gothic UI",
+    sans-serif;
+  max-width: 900px;
+  margin: 2em auto;
+  padding: 0 2em;
+  line-height: 1.7;
+  color: #d4d4d4;
+  background: #252b37;
+}
+
+a {
+  color: #6cb6ff;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #3c3c3c;
+  margin: 2em 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul,
+ol {
+  padding-left: 1.5em;
+}
+
+blockquote {
+  border-left: 4px solid #555;
+  margin-left: 0;
+  padding: 0.2em 1em;
+  color: #a8a8a8;
+  background: #2c3340;
+}
+
+code {
+  font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+  background: #2f3645;
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+  font-size: 0.9em;
+  color: #9ecbff;
+}
+pre {
+  background: #2f3645;
+  border-radius: 3px;
+  padding: 1em;
+  overflow-x: auto;
+}
+pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.875em;
+  color: #d4d4d4;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+table th,
+table td {
+  border: 1px solid #444;
+  padding: 0.4em 0.8em;
+}
+table th {
+  background: #2f3645;
+}
+
+h1 {
+  background: transparent;
+  border: none;
+  padding-bottom: 0;
+  background: #49779b;
+  color: white;
+  padding: 0.4em;
+  width: calc(100% - 0.8em);
+  border-bottom: 2px solid #49779b;
+  border-top: 2px solid #49779b;
+  margin: 0;
+  margin-top: 0em;
+}
+h1:not(:first-child) {
+  margin-top: 1em;
+}
+h1 > a {
+  color: white;
+}
+h2 {
+  background: transparent;
+  border-right: none;
+  border-left: 5px solid #49779b;
+  border-bottom: 2px solid #49779b;
+  padding-bottom: 0;
+  padding-left: 0.2em;
+  margin-left: 0;
+  width: calc(100% - 20px);
+}
+h3 {
+  width: auto;
+  display: table;
+  background: transparent;
+  border-right: none;
+  border-bottom: 2px solid #49779b;
+  padding-bottom: 0;
+  margin-left: 0;
+}
+h4 {
+  border-left: 3px solid #49779b;
+  padding-left: 0.2em;
+  font-size: 15px;
+}
+h5 {
+  display: inline-block;
+  border-bottom: 2px solid #b7b7b7;
+  border-right: none;
+  font-size: 14.5px;
+}
+h6 {
+  border-left: 3px solid #b7b7b7;
+  border-right: none;
+  padding-left: 0.2em;
+  font-size: 14px;
+}
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  text-decoration: none;
+}
+h1 > a:hover,
+h2 > a:hover,
+h3 > a:hover,
+h4 > a:hover,
+h5 > a:hover,
+h6 > a:hover {
+  text-decoration: underline;
+}
