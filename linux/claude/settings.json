@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": ["Fetch", "Grep", "Read", "Skill", "WebFetch", "WebSearch"]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  }
+}

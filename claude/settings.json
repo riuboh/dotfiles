@@ -10,6 +10,7 @@
       "WebSearch"
     ]
   },
+  "model": "opus",
   "hooks": {
     "Notification": [
       {
@@ -41,6 +42,5 @@
   "enabledPlugins": {
     "discord@claude-plugins-official": true
   },
-  "effortLevel": "medium",
-  "model": "opus"
+  "effortLevel": "medium"
 }

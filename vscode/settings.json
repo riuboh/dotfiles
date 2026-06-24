@@ -42,4 +42,5 @@
   "git.confirmSync": false,
   "docker.extension.enableComposeLanguageServer": false,
   "chat.disableAIFeatures": true,
+  "markdown.updateLinksOnFileMove.enabled": "prompt",
 }

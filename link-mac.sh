@@ -9,7 +9,6 @@ dotfiles=(
     ".zshrc:$HOME/.zshrc"
     ".gitconfig:$HOME/.gitconfig"
     "bin:$HOME/bin"
-    "claude/commands:$HOME/.claude/commands"
     "claude/skills:$HOME/.claude/skills"
     "claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
     "claude/mcp.json:$HOME/.claude/mcp.json"

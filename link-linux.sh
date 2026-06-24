@@ -5,16 +5,13 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p ~/.claude
 
 dotfiles=(
-    "bin:$HOME/bin"
-    ".gitconfig:$HOME/.gitconfig"
-    ".bashrc:$HOME/.bashrc"
-    "claude/commands:$HOME/.claude/commands"
-    "claude/skills:$HOME/.claude/skills"
-    "claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
-    "claude/mcp.json:$HOME/.claude/mcp.json"
-    "claude/settings.json:$HOME/.claude/settings.json"
-    "claude/statusline.sh:$HOME/.claude/statusline.sh"
-    "claude/notify.sh:$HOME/.claude/notify.sh"
+    "linux/.gitconfig:$HOME/.gitconfig"
+    "linux/.bashrc:$HOME/.bashrc"
+    "linux/claude/skills:$HOME/.claude/skills"
+    "linux/claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
+    "linux/claude/mcp.json:$HOME/.claude/mcp.json"
+    "linux/claude/settings.json:$HOME/.claude/settings.json"
+    "linux/claude/statusline.sh:$HOME/.claude/statusline.sh"
 )
 
 for dotfile in "${dotfiles[@]}"; do
