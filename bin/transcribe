@@ -1,0 +1,46 @@
+#!/bin/bash
+# 音声/動画ファイルをローカルで文字起こしし、同じ場所に .txt を保存する。
+# macOS 26+ の Speech フレームワークを使うため、ネットワークには出ない。
+#
+#   transcribe /Users/riuboh/recording/20260625_210054.mp3
+#     -> /Users/riuboh/recording/20260625_210054.txt
+#
+# 初回とソース更新時だけ swiftc でビルドし、以降はキャッシュを使う。
+
+set -euo pipefail
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "transcribe: macOS 専用です（Speech フレームワークを使用）" >&2
+    exit 1
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SRC="${SCRIPT_DIR}/transcribe.swift"
+
+if [[ ! -f "${SRC}" ]]; then
+    echo "transcribe: ソースが見つかりません: ${SRC}" >&2
+    exit 1
+fi
+
+if ! command -v swiftc >/dev/null 2>&1; then
+    echo "transcribe: swiftc が見つかりません。'xcode-select --install' を実行してください" >&2
+    exit 1
+fi
+
+# swiftc のバージョンもキーに含める。Xcode/CLT 更新後に古いバイナリが残るのを防ぐ。
+CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/transcribe"
+KEY="$(swiftc --version 2>/dev/null | head -1 | shasum | cut -c1-12)"
+BIN="${CACHE_DIR}/transcribe-${KEY}"
+
+if [[ ! -x "${BIN}" || "${SRC}" -nt "${BIN}" ]]; then
+    mkdir -p "${CACHE_DIR}"
+    echo "transcribe: ビルドしています..." >&2
+    if ! swiftc -O -parse-as-library "${SRC}" -o "${BIN}.tmp$$"; then
+        rm -f "${BIN}.tmp$$"
+        echo "transcribe: ビルドに失敗しました" >&2
+        exit 1
+    fi
+    mv -f "${BIN}.tmp$$" "${BIN}"
+fi
+
+exec "${BIN}" "$@"
