@@ -1,9 +1,12 @@
 #!/bin/bash
-# 音声/動画ファイルをローカルで文字起こしし、同じ場所に .txt を保存する。
+# 音声/動画ファイルをローカルで文字起こしし、同じ場所に .srt を保存する。
 # macOS 26+ の Speech フレームワークを使うため、ネットワークには出ない。
 #
 #   transcribe /Users/riuboh/recording/20260625_210054.mp3
-#     -> /Users/riuboh/recording/20260625_210054.txt
+#     -> /Users/riuboh/recording/20260625_210054.srt
+#
+# 素のテキストが欲しい場合:
+#   grep -vE '^[0-9]+$|-->|^$' foo.srt > foo.txt
 #
 # 初回とソース更新時だけ swiftc でビルドし、以降はキャッシュを使う。
 

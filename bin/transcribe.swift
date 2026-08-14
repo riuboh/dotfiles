@@ -1,5 +1,7 @@
 // macOS 26+ の Speech フレームワークでローカル文字起こしを行う。
-// 音声/動画ファイルを受け取り、同じ場所に .txt を書き出す。
+// 音声/動画ファイルを受け取り、同じ場所に .srt を書き出す。
+// 素のテキストが欲しい場合は srt から落とせる（txt からの逆変換はできないので srt を残す）:
+//   grep -vE '^[0-9]+$|-->|^$' foo.srt > foo.txt
 // ビルドは bin/transcribe（ラッパー）が自動で行う。
 
 import AVFoundation
@@ -46,13 +48,13 @@ struct Transcribe {
         }
 
         let (stream, continuation) = AsyncStream<AnalyzerInput>.makeStream()
-        let resultsTask = Task { () -> [String] in
-            var lines: [String] = []
+        let resultsTask = Task { () -> [(text: String, range: CMTimeRange)] in
+            var cues: [(text: String, range: CMTimeRange)] = []
             for try await result in transcriber.results where result.isFinal {
                 let line = String(result.text.characters).trimmingCharacters(in: .whitespacesAndNewlines)
-                if !line.isEmpty { lines.append(line) }
+                if !line.isEmpty { cues.append((line, result.range)) }
             }
-            return lines
+            return cues
         }
 
         try await analyzer.start(inputSequence: stream)
@@ -65,10 +67,23 @@ struct Transcribe {
         continuation.finish()
         try await analyzer.finalizeAndFinishThroughEndOfInput()
 
-        let lines = try await resultsTask.value
-        let outURL = url.deletingPathExtension().appendingPathExtension("txt")
-        try (lines.joined(separator: "\n") + "\n").write(to: outURL, atomically: true, encoding: .utf8)
+        let cues = try await resultsTask.value
+        let outURL = url.deletingPathExtension().appendingPathExtension("srt")
+        var srt = ""
+        for (index, cue) in cues.enumerated() {
+            srt += "\(index + 1)\n\(timecode(cue.range.start)) --> \(timecode(cue.range.end))\n\(cue.text)\n\n"
+        }
+        try srt.write(to: outURL, atomically: true, encoding: .utf8)
         print(outURL.path)
+    }
+
+    /// SRT のタイムコード（HH:MM:SS,mmm）。
+    static func timecode(_ time: CMTime) -> String {
+        let total = max(time.seconds, 0)
+        let whole = Int(total)
+        return String(
+            format: "%02d:%02d:%02d,%03d",
+            whole / 3600, (whole % 3600) / 60, whole % 60, Int((total - Double(whole)) * 1000))
     }
 
     /// 指定ロケールの SpeechTranscriber を用意する。モデル未導入なら取得を試みる。
@@ -84,7 +99,7 @@ struct Transcribe {
             locale: locale,
             transcriptionOptions: [],
             reportingOptions: [],
-            attributeOptions: []
+            attributeOptions: [.audioTimeRange]  // SRT のタイムコードに使う
         )
 
         let installed = await SpeechTranscriber.installedLocales
